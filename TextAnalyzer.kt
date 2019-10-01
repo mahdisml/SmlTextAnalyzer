@@ -1,15 +1,20 @@
 import java.io.File
 
-class TextAnalyzer (PATH : String) {
-    private val data:List<String> = File(PATH).readText().split(" ","\n","\r",".",",","\\","/")
+class TextAnalyzer (PATH:String) {
+    private val data:List<String> = File(PATH).readText()
+        .split(" ","\n","\r",".",",","\\","/",":","-","'","\"",">","<",":","=","!","?")
     private var words:MutableMap<String,Int> = mutableMapOf()
     init {
         for (i in data){
-            if(i != "") {
-                if (!words.containsKey(i.toLowerCase())) {
-                    words[i.toLowerCase()] = 1
-                } else {
-                    words[i.toLowerCase()] = words[i.toLowerCase()]!! + 1
+            try {
+                i.toInt()
+            } catch (e: Exception) {
+                if(i != "" && i != "-->") {
+                    if (!words.containsKey(i.toLowerCase())) {
+                        words[i.toLowerCase()] = 1
+                    } else {
+                        words[i.toLowerCase()] = words[i.toLowerCase()]!! + 1
+                    }
                 }
             }
         }
