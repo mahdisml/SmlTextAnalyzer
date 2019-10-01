@@ -1,7 +1,7 @@
 import java.io.File
 
 class TextAnalyzer (PATH : String) {
-    private val data:List<String> = File(PATH).readText().split(" ","\n","\r",".",",")
+    private val data:List<String> = File(PATH).readText().split(" ","\n","\r",".",",","\\","/")
     private var words:MutableMap<String,Int> = mutableMapOf()
     init {
         for (i in data){
